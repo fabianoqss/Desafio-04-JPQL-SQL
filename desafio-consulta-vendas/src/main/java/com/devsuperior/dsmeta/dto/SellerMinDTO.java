@@ -17,8 +17,8 @@ public class SellerMinDTO {
     }
 
     public SellerMinDTO(SummaryReportProjection summaryReportProjection){
-        sellerName = summaryReportProjection.sellerName();
-        amount = summaryReportProjection.amount();
+        sellerName = summaryReportProjection.getSellerName();
+        amount = summaryReportProjection.getAmount();
     }
 
     public String getSellerName() {

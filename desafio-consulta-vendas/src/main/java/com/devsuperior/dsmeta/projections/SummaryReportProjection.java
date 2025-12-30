@@ -1,8 +1,10 @@
 package com.devsuperior.dsmeta.projections;
 
+import java.math.BigDecimal;
+
 public interface SummaryReportProjection {
 
 
-    String sellerName();
-    Double amount();
+    String getSellerName();
+    Double getAmount();
 }

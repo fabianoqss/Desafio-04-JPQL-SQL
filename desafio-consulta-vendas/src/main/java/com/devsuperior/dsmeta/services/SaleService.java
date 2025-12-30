@@ -4,6 +4,7 @@ package com.devsuperior.dsmeta.services;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 
 import com.devsuperior.dsmeta.dto.DateRangeDTO;
@@ -31,22 +32,22 @@ public class SaleService {
 		return new SaleMinDTO(entity);
 	}
 
-    public Page<SaleMinDTO> getReport(String name, String minDate, String maxDate, Pageable pageable){
+    public List<SaleMinDTO> getReport(String name, String minDate, String maxDate){
 
         DateRangeDTO variableLocal = switchDates(minDate, maxDate);
 
-        Page<SaleReportProjection> lista = repository.search1
-                (name, variableLocal.getMinDate(), variableLocal.getMaxDate()  ,pageable);
+        List<SaleReportProjection> lista = repository.search1
+                (name, variableLocal.getMinDate(), variableLocal.getMaxDate());
 
-        return lista.map(x -> new SaleMinDTO(x));
+        return lista.stream().map(x -> new SaleMinDTO(x)).toList();
     }
 
-    public Page<SellerMinDTO> getSummary(String minDate, String maxDate, Pageable pageable){
+    public List<SellerMinDTO> getSummary(String minDate, String maxDate){
         DateRangeDTO localVariable = switchDates(minDate, maxDate);
 
-        Page<SummaryReportProjection> lista =  repository.search2(localVariable.getMinDate(), localVariable.getMaxDate(), pageable);
+        List<SummaryReportProjection> lista =  repository.search2(localVariable.getMinDate(), localVariable.getMaxDate());
 
-        return lista.map(x -> new SellerMinDTO(x));
+        return lista.stream().map(x -> new SellerMinDTO(x)).toList();
     }
 
 
